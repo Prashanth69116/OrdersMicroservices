@@ -1,0 +1,9 @@
+server:
+  port: 9192
+
+spring:
+  MySQL:
+    console:
+      enabled: true  
+  application:
+    name: ORDER-SERVICE

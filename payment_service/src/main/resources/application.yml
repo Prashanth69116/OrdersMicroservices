@@ -1,0 +1,9 @@
+server:
+  port: 9191  
+
+spring:
+  MySQL:
+    console:
+      enabled: true  
+  application:
+    name: PAYMENT-SERVICE
