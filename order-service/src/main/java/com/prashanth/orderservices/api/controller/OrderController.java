@@ -38,11 +38,13 @@ public class OrderController {
 	{
 		return service.getOrders(order);
 	}
+	/*getting the orders by Id*/
 	@GetMapping("getOrder/{id}")
 	public Order getOrder(@PathVariable int id)
 	{
 		return service.getOrders(id);
 	}
+	/*deleting the All orders*/
 	@DeleteMapping("deleteAll")
 	public ResponseEntity<String> deleteAll()
 	{
