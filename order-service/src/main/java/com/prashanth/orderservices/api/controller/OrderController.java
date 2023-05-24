@@ -26,11 +26,13 @@ public class OrderController {
 	@Autowired
 	private OrderService service;
 	
+	/*booking an order*/
 	@PostMapping("/bookOrder")
 	public TransactionResponse bookOrder(@RequestBody TransactionRequest request)
 	{
 		return service.saveOrder(request);	
 	}
+	/*getting the orders*/
 	@GetMapping("/orders")
 	public List<Order> getOrders(Order order)
 	{
