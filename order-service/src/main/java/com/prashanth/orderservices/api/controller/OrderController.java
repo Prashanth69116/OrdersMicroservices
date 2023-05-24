@@ -32,19 +32,19 @@ public class OrderController {
 	{
 		return service.saveOrder(request);	
 	}
-	/*getting the orders*/
+	/*getting the Orders*/
 	@GetMapping("/orders")
 	public List<Order> getOrders(Order order)
 	{
 		return service.getOrders(order);
 	}
-	/*getting the orders by Id*/
+	/*getting the orders by ID*/
 	@GetMapping("getOrder/{id}")
 	public Order getOrder(@PathVariable int id)
 	{
 		return service.getOrders(id);
 	}
-	/*deleting all orders*/
+	/*deleting all Orders*/
 	@DeleteMapping("deleteAll")
 	public ResponseEntity<String> deleteAll()
 	{
