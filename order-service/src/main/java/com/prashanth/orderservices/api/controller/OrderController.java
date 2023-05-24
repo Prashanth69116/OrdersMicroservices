@@ -44,7 +44,7 @@ public class OrderController {
 	{
 		return service.getOrders(id);
 	}
-	/*deleting the All orders*/
+	/*deleting all orders*/
 	@DeleteMapping("deleteAll")
 	public ResponseEntity<String> deleteAll()
 	{
