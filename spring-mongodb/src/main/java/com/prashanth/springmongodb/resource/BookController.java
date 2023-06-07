@@ -48,31 +48,69 @@ public class BookController {
 			return new ResponseEntity<>("Added Book with Id: "+book.getId(),HttpStatus.OK);
 		}catch(DuplicateBookException ex)
 		{
-			return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
 		}
 	}
+	
+	
+	
 	@GetMapping("/findAllBooks")
-	public List<Book> getBooks()
+	/*public List<Book> getBooks()
 	{
 		if(repository.count()<=0)
 		{
 			throw new BooksNotFoundException("There is No books in the record.");
 		}
 		return repository.findAll();
+	}*/
+	public  ResponseEntity<List<Book>> getBooks()
+	{
+		try 
+		{
+			if(repository.count()<=0)
+			{
+				throw new BooksNotFoundException("There is No books in the record");
+			}
+			List<Book> book=repository.findAll();
+			return new ResponseEntity<>(book, HttpStatus.OK);
+		}
+		catch(BooksNotFoundException ex)
+		{
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
+	
+	
 	@GetMapping("/findAllBooks/{id}")
-	public Optional<Book> getBooksById(@PathVariable int id)
+	/*public Optional<Book> getBooksById(@PathVariable int id)
 	{
 		if(!(repository.existsById(id)))
 		{
 			throw new BookNotFoundException("Book with ID " + id + " is not exists.");
 		}
 		return repository.findById(id);
+	}*/
+	public ResponseEntity<Optional<Book>> getBooksById(@PathVariable int id)
+	{
+		try {
+			if(!(repository.existsById(id)))
+			{
+				throw new BookNotFoundException("Book with Id "+ id + " is not exists.");
+			}
+			Optional<Book> book=repository.findById(id);
+			return new ResponseEntity<>(book, HttpStatus.OK);
+			
+		}catch(BookNotFoundException ex)
+		{
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
+	
+	
 	@DeleteMapping("/delete/{id}")
-	public String DeleteBook(@PathVariable int id)
+	/*public String DeleteBook(@PathVariable int id)
 	{
 		if(!(repository.existsById(id)))
 		{
@@ -80,7 +118,22 @@ public class BookController {
 		}
 		repository.deleteById(id);
 		return "Book deleted with id: "+id;
+	}*/
+	
+	public ResponseEntity<String> DeleteBook(@PathVariable int id)
+	{
+		try {
+			if(!(repository.existsById(id)))
+			{
+				throw new BookNotFoundException("Book with Id "+ id + " is not exist.");
+			}
+			return new ResponseEntity<>("Book is deleted with id : "+id,HttpStatus.OK);
+		}catch(BookNotFoundException ex)
+		{
+			return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
+		}
 	}
+	
 	
 
 }
